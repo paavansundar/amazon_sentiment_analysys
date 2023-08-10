@@ -7,6 +7,15 @@ sys.path.append(str(root))
 import typing as t
 from pathlib import Path
 
+from bs4 import BeautifulSoup
+import io
+import re
+import json
+import nltk
+from nltk.corpus import stopwords
+nltk.download('stopwords')
+nltk.download('punkt')
+
 import joblib
 import pandas as pd
 from sklearn.pipeline import Pipeline
@@ -17,8 +26,14 @@ from sentiment_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 ##  Pre-Pipeline Preparation
 
+def removeUnwantedWords(text):
+  stop_words = set(stopwords.words('english'))
+  #common_words=nltk.FreqDist(text)
+  words = [w for w in text if not w in stop_words]
+  return "".join(words)
+    
 # Extract year and month from the date column and create two another columns
-def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
+def pre_pipeline_preparation(*, df: pd.DataFrame) -> pd.DataFrame:
     #drop nulls
     df.dropna(inplace=True,axis=0)
     #drop duplicates
@@ -26,13 +41,16 @@ def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
     df.drop(df[df.is_duplicate == True].index, inplace=True)
     #convert unix time to normal time
     df['Time']=pd.to_datetime(df['Time'], unit='s')
+    df['Text'] = df['Text'].apply(lambda x:re.sub('<.*?>',' ',x, flags=re.MULTILINE)) #remove html tags
+    df['Text'] = df['Text'].apply(lambda x:re.sub('[%s]' % re.escape("""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""), ' ', x,flags=re.MULTILINE)) #remove punctuation
+    df['Text']=df['Text'].apply(removeUnwantedWords)
     
     # Drop unnecessary fields
     for field in config.model_config.unused_fields:
-        if field in data_frame.columns:
-            data_frame.drop(labels = field, axis=1, inplace=True)    
+        if field in df.columns:
+            df.drop(labels = field, axis=1, inplace=True)    
 
-    return data_frame
+    return df
 
 
 def _load_raw_dataset(*, file_name: str) -> pd.DataFrame:
