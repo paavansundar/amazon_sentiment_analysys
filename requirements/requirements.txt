@@ -1,1 +1,14 @@
+numpy
+pandas
+seaborn
+matplotlib
+datetime
+bs4
+io
+re
+json
+nltk
+sklearn
+tensorflow
+keras
 
