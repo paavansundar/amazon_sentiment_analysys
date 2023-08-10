@@ -11,32 +11,21 @@ import joblib
 import pandas as pd
 from sklearn.pipeline import Pipeline
 
-from bikeshare_model import __version__ as _version
-from bikeshare_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
+from sentiment_model import __version__ as _version
+from sentiment_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
 
 ##  Pre-Pipeline Preparation
 
 # Extract year and month from the date column and create two another columns
-
-def get_year_and_month(dataframe: pd.DataFrame, date_var: str):
-
-    df = dataframe.copy()
-    
-    # convert 'dteday' column to Datetime datatype
-    df[date_var] = pd.to_datetime(df[date_var], format='%Y-%m-%d')
-    
-    # Add new features 'yr' and 'mnth
-    df['yr'] = df[date_var].dt.year
-    df['mnth'] = df[date_var].dt.month_name()
-    
-    return df
-
-
-
 def pre_pipeline_preparation(*, data_frame: pd.DataFrame) -> pd.DataFrame:
-
-    data_frame = get_year_and_month(dataframe = data_frame, date_var = config.model_config.date_var)
+    #drop nulls
+    df.dropna(inplace=True,axis=0)
+    #drop duplicates
+    df['is_duplicate']=df.duplicated()
+    df.drop(df[df.is_duplicate == True].index, inplace=True)
+    #convert unix time to normal time
+    df['Time']=pd.to_datetime(df['Time'], unit='s')
     
     # Drop unnecessary fields
     for field in config.model_config.unused_fields:
