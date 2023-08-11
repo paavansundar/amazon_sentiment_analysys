@@ -30,8 +30,8 @@ class AppConfig(BaseModel):
 
     package_name: str
     training_data_file: str
-    pipeline_name: str
-    pipeline_save_file: str
+    model_name:str
+    model_save_file:str
 
 
 class ModelConfig(BaseModel):
@@ -43,7 +43,11 @@ class ModelConfig(BaseModel):
     target: str
     features: List[str]
     unused_fields: List[str]
-    
+    test_size:float
+    random_state:int
+    batch_size:int
+    epochs:int
+
     
 
 
