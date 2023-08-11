@@ -8,8 +8,8 @@ training_data_file: Reviews.csv
 # The variable we are attempting to predict (cnt)
 target: Sentiment
 
-pipeline_name: sentiment_model
-pipeline_save_file: sentiment__model_output_v
+model_name: sentiment_model
+model_save_file: sentiment__model_output_v
 
 # Features that will go inside processing pipeline
 features:
@@ -22,10 +22,10 @@ unused_fields:  # Features to drop before pipeline
 
   
 # Set train/test split
-test_size: 0.20
+test_size: 0.2
 
 # Set the random seed
-random_state: 42
+random_state: 0
 
 # Alogrithm parameters
 batch_size: 128
