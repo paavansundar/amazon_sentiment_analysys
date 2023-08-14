@@ -44,4 +44,4 @@ def make_prediction():
 
     # predict
     pred = model.predict(x=test_samples_tokens_pad)
-    assert lent(pred) > 0
+    assert len(pred) > 0
