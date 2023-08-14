@@ -39,7 +39,7 @@ def make_prediction():
     test_sample_1 = "This product is fantastic! I really like it because it is so good!"
 
 
-    test_samples_tokens = tokenizer.texts_to_sequences(test_samples)
+    test_samples_tokens = tokenizer.texts_to_sequences(test_sample_1)
     test_samples_tokens_pad = pad_sequences(test_samples_tokens, maxlen=100)
 
     # predict
