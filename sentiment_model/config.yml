@@ -2,7 +2,7 @@
 package_name: sentiment_model
 
 # Data Files
-training_data_file: Reviews.csv
+training_data_file: new_csv.csv
 
 # Variables
 # The variable we are attempting to predict (cnt)
