@@ -35,7 +35,8 @@ class TestSentiment:
 #print(type(tokenizer))
 
  def make_prediction():
-    tokenizer=self.load_tokenizer()
+    this=TestSentiment()
+    tokenizer=this.load_tokenizer()
     #Let us test some  samples
     test_sample_1 = "This product is fantastic! I really like it because it is so good!"
 
