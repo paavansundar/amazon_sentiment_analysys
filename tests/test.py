@@ -17,17 +17,13 @@ from sentiment_model.config.core import config
 from sentiment_model.processing.data_manager import load_model
 #from sentiment_model.processing.data_manager import pre_model_preparation
 #from sentiment_model.processing.validation import validate_inputs
-
-
-model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
-model = load_model(file_name = model_file_name)
-    
-
     
 
 #print(type(tokenizer))
 def test_make_prediction():
     
+    model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
+    model = load_model(file_name = model_file_name)
     tokenizer=None
     with open(str(parent.absolute())+"/trained_tokenizer/tokenizer.json") as f:
         data = json.load(f)
