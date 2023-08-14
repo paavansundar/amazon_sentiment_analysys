@@ -22,19 +22,16 @@ from sentiment_model.processing.data_manager import load_model
 model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
 model = load_model(file_name = model_file_name)
     
-def load_tokenizer(self):
-    tokenizer=None
-    with open(str(parent.absolute())+"/trained_tokenizer/tokenizer.json") as f:
-        data = json.load(f)
-        tokenizer = tokenizer_from_json(data)
-    return tokenizer
 
     
 
 #print(type(tokenizer))
 def test_make_prediction():
     
-    tokenizer=load_tokenizer()
+    tokenizer=None
+    with open(str(parent.absolute())+"/trained_tokenizer/tokenizer.json") as f:
+        data = json.load(f)
+        tokenizer = tokenizer_from_json(data)
     #Let us test some  samples
     test_sample_1 = "This product is fantastic! I really like it because it is so good!"
 
@@ -43,7 +40,7 @@ def test_make_prediction():
     test_samples_tokens_pad = pad_sequences(test_samples_tokens, maxlen=100)
 
     # predict
-    pred = model.predict(x=test_samples_tokens_pad)
+    pred = model.predict(x=test_samples_tokens_pad[0])
     assert len(pred) > 0
 
 
