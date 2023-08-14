@@ -1,0 +1,21 @@
+name: sentiment_analysys_cd
+
+# Only trigger, when the build workflow succeeded
+on:
+  workflow_run:
+    workflows: ["sentiment_analysys_ci"]
+    types:
+      - completed
+
+jobs:
+
+  build:
+
+    runs-on: [self-hosted]
+
+    steps:  
+    
+    - name: Build and push Docker image
+      run: |
+        sudo docker pull paavansundar/iisc:latest
+        
