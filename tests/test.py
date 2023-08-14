@@ -40,7 +40,7 @@ def test_make_prediction():
     test_samples_tokens_pad = pad_sequences(test_samples_tokens, maxlen=100)
 
     # predict
-    pred = model.predict(x=test_samples_tokens_pad[0])
+    pred = model.predict(x=test_samples_tokens_pad)
     assert len(pred) > 0
 
 
