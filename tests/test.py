@@ -21,9 +21,8 @@ from sentiment_model.processing.data_manager import load_model
 
 model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
 model = load_model(file_name = model_file_name)
-class TestSentiment:
     
- def load_tokenizer(self):
+def load_tokenizer(self):
     tokenizer=None
     with open(str(parent.absolute())+"/trained_tokenizer/tokenizer.json") as f:
         data = json.load(f)
@@ -33,10 +32,9 @@ class TestSentiment:
     
 
 #print(type(tokenizer))
-
- def make_prediction():
-    this=TestSentiment()
-    tokenizer=this.load_tokenizer()
+def test_make_prediction():
+    
+    tokenizer=load_tokenizer()
     #Let us test some  samples
     test_sample_1 = "This product is fantastic! I really like it because it is so good!"
 
@@ -47,3 +45,6 @@ class TestSentiment:
     # predict
     pred = model.predict(x=test_samples_tokens_pad)
     assert len(pred) > 0
+
+
+  
