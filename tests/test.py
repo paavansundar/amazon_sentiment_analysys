@@ -23,7 +23,7 @@ model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
 model = load_model(file_name = model_file_name)
 class TestSentiment:
     
- def load_tokenizer():
+ def load_tokenizer(self):
     tokenizer=None
     with open(str(parent.absolute())+"/trained_tokenizer/tokenizer.json") as f:
         data = json.load(f)
@@ -35,7 +35,7 @@ class TestSentiment:
 #print(type(tokenizer))
 
  def make_prediction():
-    tokenizer=load_tokenizer()
+    tokenizer=self.load_tokenizer()
     #Let us test some  samples
     test_sample_1 = "This product is fantastic! I really like it because it is so good!"
 
