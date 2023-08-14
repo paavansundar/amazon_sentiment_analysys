@@ -8,3 +8,4 @@ tensorflow
 keras
 pydantic
 strictYAML
+pytest
