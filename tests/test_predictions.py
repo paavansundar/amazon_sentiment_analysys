@@ -25,7 +25,7 @@ def test_make_prediction():
     model_file_name = f"{config.app_config.model_save_file}{_version}.pkl"
     model = load_model(file_name = model_file_name)
     tokenizer=None
-    with open(str(root.absolute())+"sentiment_model/trained_tokenizer/tokenizer.json") as f:
+    with open(str(root.absolute())+"/sentiment_model/trained_tokenizer/tokenizer.json") as f:
         data = json.load(f)
         tokenizer = tokenizer_from_json(data)
     #Let us test some  samples
