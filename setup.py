@@ -6,7 +6,7 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 # Package meta-data.
-NAME = 'bikeshare_model'
+NAME = 'sentiment_model'
 DESCRIPTION = "Titanic dataset classification model package "
 EMAIL = "paavan.sundar@gmail.com"
 AUTHOR = "AIMLOps Batch 5"
